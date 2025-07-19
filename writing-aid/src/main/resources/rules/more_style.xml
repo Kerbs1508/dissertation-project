@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules>
+<rule id="PASSIVE_VOICE_SUGGESTION" name="Suggest avoiding passive voice" class="org.languagetool.rules.patterns.PatternRule">
+    <pattern>  <token postag="VBP|VBZ|VBD|VBN">is|are|was|were|been|being</token> <token postag="VBN"/> </pattern>
+    <message>Consider using active verbs to make the writing more clear to uunderstand.</message>
+    <short>Suggest active voice</short>
+    <example correction="The dog chased the cat."><marker>The cat was chased</marker> by the dog.</example> </rule>
+</rules>

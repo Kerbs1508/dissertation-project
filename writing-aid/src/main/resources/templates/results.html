@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Grammar Check Results</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 2em;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        h1 {
+            color: #5e2e87;
+            text-align: center;
+            margin-bottom: 1em;
+        }
+        p {
+            margin-bottom: 1em;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+        .suggestion {
+            color: green;
+            font-style: italic;
+        }
+        .results-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1em;
+        }
+        .issue-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .issue-item {
+            margin-bottom: 1em;
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+        .corrected-text-container {
+            margin-top: 2em;
+            padding: 15px;
+            border: 1px solid #d4edda;
+            border-radius: 4px;
+            background-color: #e9fbea;
+            color: #155724;
+        }
+        .corrected-text-title {
+            font-weight: bold;
+            margin-bottom: 0.5em;
+            color: #198754;
+        }
+        a {
+            color: #5e2e87;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Grammar Check Results</h1>
+
+    <div class="results-container">
+        <div th:if="${matches.isEmpty()}">
+            <p>No issues were found within text!</p>
+        </div>
+
+        <div th:unless="${matches.isEmpty()}">
+            <p>The following issues were found in your text:</p>
+            <p><strong>Your Input:</strong> <span th:text="${inputText}"></span></p>
+            <ul class="issue-list">
+                <li class="issue-item" th:each="match : ${matches}">
+                    <p>
+                        <span th:utext="${#strings.substring(inputText, 0, match.getFromPos())}"></span>
+                        <span class="error" th:utext="${#strings.substring(inputText, match.getFromPos(), match.getToPos())}"></span>
+                        <span th:utext="${#strings.substring(inputText, match.getToPos())}"></span>
+                    </p>
+                    <p><strong>Issue:</strong> <span th:text="${match.getMessage}"></span></p>
+                    <div th:if="${not #lists.isEmpty(match.suggestedReplacements)}">
+                        <p><strong>Suggestions:</strong>
+                            <ul style="list-style-type:disc">
+                                <li class="suggestion" th:each="suggestion : ${match.suggestedReplacements}" th:text="${suggestion}"></li>
+                            </ul>
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="corrected-text-container" th:if="${correctedText}">
+        <h2 class="corrected-text-title">Suggested Corrections</h2>
+        <p th:text="${correctedText}"></p>
+    </div>
+
+    <p><a href="/">Check another text</a></p>
+</body>
+</html>

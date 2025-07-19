@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules>
+<rule id="IT_IS_CONTRACTION" name="Suggest 'it's' for 'it is'" class="org.languagetool.rules.patterns.PatternRule">
+    <pattern>  <token postag=".*">it</token>  <token postag=".*">is</token>
+    </pattern>
+    <message>Consider using the contraction <suggestion>it's</suggestion>, especially in informal writing.</message>
+    <short>Suggest contraction 'it's'</short>
+    <example correction="it's"><marker>It is</marker> a beautiful day.</example>
+    <example>The book is on the table.</example> </rule>
+</rules>

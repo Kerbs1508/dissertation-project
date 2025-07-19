@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules lang="en">
+  <rule id="SPELL_YUNG" name="Misspelling of young">
+    <pattern>
+      <token>yung</token>
+    </pattern>
+    <message>Did you mean <suggestion>young</suggestion>?</message>
+    <short>Misspelling</short>
+  </rule>
+
+  <rule id="SPELL_SNAIL" name="Misspelling of snail">
+    <pattern>
+      <token>snall</token>
+    </pattern>
+    <message>Did you mean <suggestion>small</suggestion> or <suggestion>snail</suggestion>?</message>
+    <short>Misspelling</short>
+  </rule>
+
+  <rule id="SPELL_VILAGE" name="Misspelling of village">
+    <pattern>
+      <token>vilage</token>
+    </pattern>
+    <message>Did you mean <suggestion>village</suggestion>?</message>
+    <short>Misspelling</short>
+  </rule>
+
+  <rule id="MISSING_AND" name="Missing conjunction 'and'">
+    <pattern>
+      <token>,</token>
+      <token>the</token>
+    </pattern>
+    <message>Consider adding the conjunction <suggestion>and</suggestion> before 'the'.</message>
+    <short>Missing word</short>
+  </rule>
+</rules>
